@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bytebank.Portal.Infraestrutura;
+using System;
 
 namespace Bytebank.Portal
 {
@@ -6,7 +7,9 @@ namespace Bytebank.Portal
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var prefixos = new string[] { "http://localhost:5341/" };
+            var webAplication = new WebApplication(prefixos);
+            webAplication.Iniciar();
         }
     }
 }
