@@ -45,46 +45,12 @@ namespace Bytebank.Portal.Infraestrutura
                 var manipulador = new ManipuladorRequisicaoArquivo();
                 manipulador.Manipular(resposta, path);
             }
-            else if (path == "/Cambio/MXN")
+            else
             {
-                var controller = new CambioController();
-
-                var paginaConteudo = controller.MXN();
-
-                //Tranformando o arquivo para bytes.
-                var bufferArquivo = Encoding.UTF8.GetBytes(paginaConteudo);
-
-                resposta.StatusCode = 200;
-
-                //Tipo de Resposta que ira ser enviada.
-                resposta.ContentType = "text/html; charset=utf-8";
-                
-                //Tamanho da resposta que sera enviada ao navegador.
-                resposta.ContentLength64 = bufferArquivo.Length;
-
-                //Stream(Fluxo) de saida 
-                resposta.OutputStream.Write(bufferArquivo, 0, bufferArquivo.Length);
-                resposta.OutputStream.Close();
-            }else if (path == "/Cambio/USD")
-            {
-                var controller = new CambioController();
-
-                var paginaConteudo = controller.USD();
-
-                //Tranformando o arquivo para bytes.
-                var bufferArquivo = Encoding.UTF8.GetBytes(paginaConteudo);
-
-                resposta.StatusCode = 200;
-                //Tipo de Resposta que ira ser enviada.
-                resposta.ContentType = "text/html; charset=utf-8";
-                //Tamanho da resposta que sera enviada ao navegador.
-                resposta.ContentLength64 = bufferArquivo.Length;
-
-                //Stream(Fluxo) de saida 
-                resposta.OutputStream.Write(bufferArquivo, 0, bufferArquivo.Length);
-                resposta.OutputStream.Close();
+                var manipulador = new ManipuladorRequisicaoController();
+                manipulador.Manipular(resposta, path);
             }
-
+                
             httpListener.Stop();
         }
     }
